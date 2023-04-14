@@ -34,11 +34,11 @@ export const useAuthentication = () => {
     setError(null)
 
     try {
-      const {user} = await createUserWithEmailAndPassword(
+      const { user } = await createUserWithEmailAndPassword(
         auth,
         data.email,
         data.password
-      )
+      );
 
       // atualiza user com o nome enviado
       await updateProfile(user, {
@@ -46,6 +46,7 @@ export const useAuthentication = () => {
       })
 
       setLoading(false)
+      return user
 
     } catch (error) {
       console.log(error.message)
@@ -74,15 +75,51 @@ export const useAuthentication = () => {
     signOut(auth)
   }
 
-  useEffect(() => {
-    return () => setCancelled(true)
-  }, [])
+  // login - sign in
+  const login = async (data) => {
+    checkIfIsCancelled();
 
-  return {
+    setLoading(true);
+    setError(false);
+
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+    } catch (error) {
+      console.log(error.message);
+      console.log(typeof error.message);
+      console.log(error.message.includes("user-not"));
+
+      let systemErrorMessage;
+
+      if (error.message.includes("user-not-found")) {
+        systemErrorMessage = "Usuário não encontrado.";
+      } else if (error.message.includes("wrong-password")) {
+        systemErrorMessage = "Senha incorreta.";
+      } else {
+        systemErrorMessage = "Ocorreu um erro, por favor tenta mais tarde.";
+      }
+
+      console.log(systemErrorMessage);
+
+      setError(systemErrorMessage);
+      setLoading(false);
+    }
+
+    console.log(error);
+
+  };
+  
+
+    useEffect(() => {
+    return () => setCancelled(true)
+    }, [])
+
+   return {
     auth,
     createUser,
     error,
     loading,
     logout,
-  }
+    login,
+    }
 }
