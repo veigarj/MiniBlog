@@ -26,11 +26,12 @@ export const useAuthentication = () => {
     }
   }
 
-
+// creat user
   const createUser = async (data) => {
     checkIfIsCancelled
 
     setLoading(true)
+    setError(null)
 
     try {
       const {user} = await createUserWithEmailAndPassword(
@@ -39,21 +40,32 @@ export const useAuthentication = () => {
         data.password
       )
 
-      // atualização do user com o nome enviado
+      // atualiza user com o nome enviado
       await updateProfile(user, {
         displayName: data.displayName
       })
+
+      setLoading(false)
 
     } catch (error) {
       console.log(error.message)
       console.log(typeof error.message)
 
+      // definição de erros
       let systemErrorMessage
 
-      if(error.message)
-      
+      if(error.message.includes("Password")) {
+        systemErrorMessage = "A  senha deve conter pelo menos 6 caracteres"
+      } else if(error.message.includes('email-already')) {
+        systemErrorMessage = "Esse email já está em uso"
+      } else {
+        systemErrorMessage = "Ocorreu um erro ao tentar cadastrar"
+      }
+      setLoading(false)
+      // imprime o erro
+      setError(systemErrorMessage)
     }
-    setLoading(false)
+    
   }
   useEffect(() => {
     return () => setCancelled(true)

@@ -35,6 +35,12 @@ const Register = () => {
     console.log(res);
   }
 
+  useEffect(() => {
+    if(AuthError) {
+      setError(AuthError)
+    }
+  }, [AuthError])
+
   return (
     <div className={styles.register}>
       <h1>Cadastre-se para postar</h1>
@@ -57,7 +63,10 @@ const Register = () => {
           <span>Confirmação de senha:</span>
           <input type="password" name='confirmPassword' required placeholder='confirme sua senha' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
         </label>
-        <button className='btn'>Cadastrar</button>
+        {/* função de loading */}
+        {!loading && <button className='btn'>Cadastrar</button>}
+        {loading && <button className='btn' disabled>Aguarde...</button>}
+        {/* função de erro  */}
         {error && <p className='error'>{error}</p>}
       </form>
     </div>
