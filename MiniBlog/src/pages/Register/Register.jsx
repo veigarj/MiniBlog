@@ -15,7 +15,7 @@ const Register = () => {
     // zera os erros
     setError("")
 
-    // forma o user
+    // creat user fron inputs
     const user = {
       displayName,
       email,
