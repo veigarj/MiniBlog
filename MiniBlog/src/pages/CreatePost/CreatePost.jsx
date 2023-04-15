@@ -31,9 +31,9 @@ const CreatePost = () => {
     title,
     image,
     body,
-    tags: tagsArray,
+    tags,
     uid: user.uid,
-    createdBy: user.displayName,
+    createdBy: user.displayName
   });
 
   // redirecionar para a home
@@ -71,7 +71,7 @@ const CreatePost = () => {
       {!response.loading && <button className='btn'>Criar post</button>}
         {response.loading && <button className='btn' disabled>Criando...</button>}
         {/* função de erro  */}
-        {response.error && <p className='error'>{error}</p>}
+        {response.error && <p className='error'>{response.error}</p>}
       
     </form>
     </div>
