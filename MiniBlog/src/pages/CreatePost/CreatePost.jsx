@@ -16,28 +16,43 @@ const CreatePost = () => {
 
   const {insertDocument, response} = useInsertDocument("posts")
   
+  const navigate = useNavigate()
+
   const handleSubmit = (e) => {
     e.preventDefault()
     // zerar erros do Form
     setFormError("")
 
   //  validar image URL
+  try {
+    new URL(image)
+  } catch (error) {
+    setFormError("A imagem precisa ser uma URL")
+    
+  }
 
   // criar array de Tags
+  const tagsArray = tags.split(",").map((tag) => tag.trim().toLowerCase())
 
   // checar todos os valores
+  if (!title || !image || !body || !tags) {
+    setFormError("Por favor, preencha todos os campos!")
+  }
+
+  if (formError) return;
 
   insertDocument({
     title,
     image,
     body,
-    tags,
+    tagsArray,
     uid: user.uid,
     createdBy: user.displayName
   });
 
   // redirecionar para a home
-  }
+ navigate("/") 
+}
 
   return (
     <div className={styles.create_post}>
@@ -72,6 +87,7 @@ const CreatePost = () => {
         {response.loading && <button className='btn' disabled>Criando...</button>}
         {/* função de erro  */}
         {response.error && <p className='error'>{response.error}</p>}
+        {formError && <p className='error'>{formError}</p>}
       
     </form>
     </div>

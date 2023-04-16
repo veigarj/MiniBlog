@@ -1,6 +1,7 @@
 import { useAuthentication } from '../../hooks/useAuthentication'
 import styles from './Register.module.css'
 
+import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
 const Register = () => {
@@ -9,6 +10,8 @@ const Register = () => {
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [error, setError] = useState("")
+
+  const navigate = useNavigate()
 
   const {createUser, error: AuthError, loading } = useAuthentication();
 
@@ -31,8 +34,8 @@ const Register = () => {
     }
 
     const res = await createUser(user)
-
-    console.log(res);
+  
+    navigate("/")
   }
 
   useEffect(() => {
