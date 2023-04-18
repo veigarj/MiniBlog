@@ -12,28 +12,35 @@ export const useFetcDocuments = (docCollection, search = null, uid = null) => {
 
   useEffect(() => {
     async function loadData() {
-      if(cancelled) return
+      if(cancelled) 
+        return
+    
 
       setLoading(true);
 
       const collectionRef = await collection(db, docCollection)
 
       try {
-        
         let q;
 
         // busca
         // dashboard
 
         if(search) {
-          q = await query(collectionRef, whare('tags', 'array-contains',search), orderBy('createdAt', 'desc')
+          q = await query(collectionRef, where('tagsArray', 'array-contains',search), orderBy('createdAt', 'desc')
           );
-        } else {
+        } else if(uid) {
+          q = await query(
+            collectionRef,
+            where("uid", "==", uid),
+            orderBy("createdAt", "desc")
+          );
+        }
+         else {
           q = await query(collectionRef, orderBy('createdAt', 'desc'));
         }
 
         await onSnapshot(q, (querySnapshot) => {
-
           setDocuments(
             querySnapshot.docs.map((doc) => ({
               id: doc.id,
