@@ -1,13 +1,6 @@
 <h1 align="center"> Projeto Mini Blog </h1>
 
-Mini Blog com pleto em Front-end em React vite com Back-end em Firebase.
-
-Funcionalidades
-
-- Registro de Usuarios
-- Login
-- Home com todos os Posts
-
+Mini Blog completo em Front-end em React vite com Back-end em Firebase.
 
 <br>
 
@@ -25,12 +18,11 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - Vite
 - Git e Github
 
-
 **O que aprendemos nesse projeto:**
 
 - Configuração do projeto
 - JSX: `form`,`header`,`main`,`section`,`select`,`img`
 - React Hooks
-- Requisição de API TMDB
-- Configuração de variaveis em Dotenv
-- Criar Search com query e useSearchParams
+- create user no Firebase
+- Funções de CRUD em Firebase para criar, ler, editar e deletar posts
+- Criar Search com query e useSearchParams e criar índices para busca
