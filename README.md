@@ -23,6 +23,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - Configuração do projeto
 - JSX: `form`,`header`,`main`,`section`,`select`,`img`
 - React Hooks
+- Area logada com useContext
 - create user no Firebase
 - Funções de CRUD em Firebase para criar, ler, editar e deletar posts
 - Criar Search com query e useSearchParams e criar índices para busca
