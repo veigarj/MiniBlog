@@ -1,6 +1,6 @@
 <h1 align="center"> Projeto Mini Blog </h1>
 
-Mini Blog completo em Front-end em React vite com Back-end em Firebase.
+Mini Blog completo com Front-end em React e Vite com Back-end em Firebase.
 
 <br>
 
