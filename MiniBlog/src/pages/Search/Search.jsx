@@ -1,7 +1,7 @@
 import styles from '../Search/Search.module.css'
 
 // hooks
-import { useFetcDocuments } from '../../hooks/useFetchDocuments'
+import { useFetchDocuments } from '../../hooks/useFetchDocuments'
 import { useQuery } from '../../hooks/useQuery'
 
 // Components
@@ -13,7 +13,7 @@ const Search = () => {
   const query = useQuery()
   const search = query.get('q')
 
-  const {documents: posts} = useFetcDocuments('posts', search);
+  const {documents: posts} = useFetchDocuments('posts', search);
   
   return (
     <div className={styles.search_container}>

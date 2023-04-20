@@ -3,7 +3,7 @@ import styles from './Home.module.css'
 // hooks
 import { useNavigate, Link, Navigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { useFetcDocuments } from '../../hooks/useFetchDocuments';
+import { useFetchDocuments } from '../../hooks/useFetchDocuments';
 import PostDetail from '../../components/PostDetail'
 
 // components
@@ -11,7 +11,7 @@ import PostDetail from '../../components/PostDetail'
 
 const Home = () => {
   const [query, setQuery] = useState('');
-  const {documents: posts, loading } = useFetcDocuments('posts');
+  const {documents: posts, loading } = useFetchDocuments('posts');
 
   const Navigate = useNavigate();
 

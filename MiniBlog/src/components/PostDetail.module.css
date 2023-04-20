@@ -29,3 +29,8 @@
   font-size: 0.8em;
   margin-bottom: 1em;
 }
+
+.image {
+  max-width: 100%;
+  margin-bottom: 1em;
+}
